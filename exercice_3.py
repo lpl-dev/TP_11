@@ -80,7 +80,6 @@ class Rational:
     def reverse(self):
         return Rational(self.__denum,self.__num)
 
-
 if __name__=='__main__':
     r1=Rational(3,2)
     r2=Rational(8,2)
