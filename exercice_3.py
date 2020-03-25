@@ -8,12 +8,9 @@ class Rational:
 
     def __add__(self, other):
         if isinstance(other,Rational):
-            if self.__denum==other.__denum:
-                return Rational(self.__num+other.__num,self.__denum)
-            else:
-                r=Rational(self.__num*other.__denum+self.__denum*other.__num,self.__denum*other.__denum)
-                r.simplify()
-                return r
+            r=Rational(self.__num*other.__denum+self.__denum*other.__num,self.__denum*other.__denum)
+            r.simplify()
+            return r
         raise Exception('Opération invalide')
 
     def __neg__(self):
@@ -53,7 +50,7 @@ class Rational:
             other.simplify()
             return self.__num==other.__num and self.__denum==other.__denum
         elif type(other) in [int,float]:
-            return self.__num/self.__denum==other
+            return self.eval()==other
         raise Exception('Condition invalide')
 
     def __ne__(self, other):
@@ -61,23 +58,16 @@ class Rational:
 
     def __lt__(self, other):
         if isinstance(other,Rational):
-            return self.__num/self.__denum<other.__num/other.__denum
+            return self.eval()<other.eval()
         raise Exception('Condition invalide')
 
     def __gt__(self, other):
-        if isinstance(other, Rational):
-            return self.__num/self.__denum>other.__num/other.__denum
-        raise Exception('Condition invalide')
+        return not self.eval()<other.eval()
 
     def __pgcd(self,a,b):
-        mx=max(a,b)
-        mn=min(a,b)
-        r=mx%mn
-        while r!=0:
-            mx=mn
-            mn=r
-            r=mx%mn
-        return mn
+        while b:
+            a,b=b,a%b
+        return a
 
     def __ppcm(self,a,b):
         return a*b/self.__pgcd(a,b)
@@ -90,8 +80,11 @@ class Rational:
     def reverse(self):
         return Rational(self.__denum,self.__num)
 
+    def eval(self):
+        return self.__num/self.__denum
+
 if __name__=='__main__':
-    r1=Rational(3,2)
+    r1=Rational(2,4)
     r2=Rational(8,2)
     print(f'r1={r1}, r2={r2}')
     print(f'-r1={-r1}, -r2={-r2}')
