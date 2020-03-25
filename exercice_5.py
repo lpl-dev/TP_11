@@ -78,10 +78,7 @@ class Matrix:
 
     def trace(self):
         if self.shape[0]==self.shape[1]:
-            tr=0
-            for i in range(self.shape[0]):
-                tr+=self.__data[i][i]
-            return tr
+            return sum([self.__data[i][i] for i in range(self.shape[0])])
         raise Exception("Le calcul de la trace n'est pas possible si la matrice n'est pas carrée")
 
 if __name__=='__main__':
