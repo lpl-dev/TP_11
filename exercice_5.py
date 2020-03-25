@@ -99,5 +99,7 @@ if __name__=='__main__':
     m1-=m2
     print(f'm1-=m2{m1}')
     print(f'm1*m2={m1*m2}')
+    m1*=m2
+    print(f'm1*=m2={m1}')
     print(f'm1<m2={m1<m2}')
     print(f'm1>m2={m1>m2}')
