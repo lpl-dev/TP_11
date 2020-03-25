@@ -3,25 +3,20 @@ class Circle:
         self.__radius=radius
 
     def __str__(self):
-        return 'Cercle de rayon '+str(self.__radius)
+        return f'Cercle de rayon {self.__radius}'
 
     def __add__(self, other):
         if isinstance(other,Circle):
-            return Circle(self.__radius+other.getRadius())
+            return Circle(self.__radius+other.__radius)
         raise Exception('Opération invalide')
 
     def __lt__(self, other):
         if isinstance(other, Circle):
-            return self.__radius<other.getRadius()
+            return self.__radius<other.__radius
         raise Exception('Comparaison invalide')
 
     def __gt__(self, other):
-        if isinstance(other, Circle):
-            return self.__radius>other.getRadius()
-        raise Exception('Comparaison invalide')
-
-    def getRadius(self):
-        return self.__radius
+        return not self.__radius<other.__radius
 
 if __name__=='__main__':
     c1=Circle(2)
