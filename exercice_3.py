@@ -59,6 +59,16 @@ class Rational:
     def __ne__(self, other):
         return not self==other
 
+    def __lt__(self, other):
+        if isinstance(other,Rational):
+            return self.__num/self.__denum<other.__num/other.__denum
+        raise Exception('Condition invalide')
+
+    def __gt__(self, other):
+        if isinstance(other, Rational):
+            return self.__num/self.__denum>other.__num/other.__denum
+        raise Exception('Condition invalide')
+
     def __pgcd(self,a,b):
         mx=max(a,b)
         mn=min(a,b)
@@ -92,3 +102,5 @@ if __name__=='__main__':
     print(f'r1**2 : {r1**2}')
     print(f'r1==r2 : {r1==r2}')
     print(f'r1!=r2 : {r1!=r2}')
+    print(f'r1<r2 : {r1<r2}')
+    print(f'r1>r2 : {r1>r2}')
