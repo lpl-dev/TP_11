@@ -92,8 +92,7 @@ class Matrix:
         else:
             det = 0
             for i in range(array.shape[0]):
-                det += (array.data[i][0] if i % 2 == 0 else -array.data[i][0]) * self.__det(Matrix(
-                    [[c for cidx, c in enumerate(r) if cidx != 0] for ridx, r in enumerate(array.data) if ridx != i]))
+                det += (array.data[i][0] if i % 2 == 0 else -array.data[i][0]) * self.__det(Matrix([[c for cidx, c in enumerate(r) if cidx != 0] for ridx, r in enumerate(array.data) if ridx != i]))
             return det
 
 if __name__=='__main__':
