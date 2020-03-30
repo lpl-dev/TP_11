@@ -105,8 +105,8 @@ class Matrix:
         if isinstance(other,Matrix):
             if self.shape==other.shape:
                 return Matrix([[c1<c2 for c1,c2 in zip(r1,r2)] for r1,r2 in zip(self.data, other.data)])
-            raise Exception('Condition impossible')
-        raise Exception('Condition impossible')
+            raise Exception('Condition impossible : matrices de tailles différentes')
+        raise Exception('Condition impossible : objets de types différents')
 
     def __gt__(self, other):
         return Matrix([[not c for c in r] for r in (self<other).data])
