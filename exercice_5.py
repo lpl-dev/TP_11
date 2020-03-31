@@ -139,7 +139,7 @@ class Matrix:
 
     def adj(self):
         """
-        Retourne la comatrice d'une matrice carrée
+        Retourne la matrice adjointe d'une matrice carrée
         :return: Matrix object
         """
         if self.shape[0]==self.shape[1]:
@@ -149,7 +149,7 @@ class Matrix:
                 for j in range(self.shape[1]):
                     row.append((-1)**(i+j) * Matrix([[c for cidx, c in enumerate(r) if cidx != j] for ridx, r in enumerate(self.data) if ridx != i]).det())
                 array.append(row)
-            return Matrix(array)
+            return Matrix(array).T
         raise Exception("Impossible de calculer la comatrice : matrice non carrée")
 
     def inv(self):
@@ -159,7 +159,7 @@ class Matrix:
         """
         det=self.det()
         if det!=0:
-            return 1/det * self.adj().T
+            return 1/det * self.adj()
         raise Exception("Impossible d'inverser la matrice : déterminant nul")
 
 if __name__=='__main__':
