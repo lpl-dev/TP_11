@@ -31,7 +31,7 @@ class Matrix:
             raise Exception("Impossible d'effectuer l'opération : matrices de tailles différentes")
         raise Exception("Impossible d'effectuer l'opération : objets de types différents")
 
-    def __iadd__(self,other):
+    def __radd__(self, other):
         return self+other
 
     def __neg__(self):
@@ -41,9 +41,6 @@ class Matrix:
         return self+(-other)
 
     def __rsub__(self, other):
-        return self-other
-
-    def __isub__(self,other):
         return self-other
 
     def __mul__(self,other):
@@ -67,18 +64,12 @@ class Matrix:
     def __rmul__(self, other):
         return self*other
 
-    def __imul__(self,other):
-        return self*other
-
     def __truediv__(self, other):
         if type(other) in [int, float]:
             if other!=0:
                 return 1/other * self
             raise Exception("Impossible d'effectuer l'opération : division par 0")
         raise Exception("Impossible d'effectuer l'opération : terme diviseur invalide")
-
-    def __itruediv__(self, other):
-        return self/other
 
     def __pow__(self,other):
         if type(other)==int:
@@ -98,9 +89,6 @@ class Matrix:
             raise Exception("Impossible d'effectuer l'opération : matrice non carrée")
         raise Exception("Impossible d'effectuer l'opération : puissance invalide")
 
-    def __ipow__(self, other):
-        return self**other
-
     def __lt__(self,other):
         if isinstance(other,Matrix):
             if self.shape==other.shape:
@@ -117,6 +105,10 @@ class Matrix:
         :return: Matrix object
         """
         return Matrix([[self.data[j][i] for j in range(self.shape[1])] for i in range(self.shape[0])])
+
+    @property
+    def T(self):
+        return self.transpose()
 
     def trace(self):
         """
@@ -167,7 +159,7 @@ class Matrix:
         """
         det=self.det()
         if det!=0:
-            return 1/det * self.adj().transpose()
+            return 1/det * self.adj().T
         raise Exception("Impossible d'inverser la matrice : déterminant nul")
 
 if __name__=='__main__':
