@@ -131,11 +131,10 @@ class Matrix:
     def __det(self, array):
         if array.shape == (1, 1):
             return array.data[0][0]
-        else:
-            det = 0
-            for i in range(array.shape[0]):
-                det += (-1)**i * array.data[i][0] * self.__det(Matrix([[c for cidx, c in enumerate(r) if cidx != 0] for ridx, r in enumerate(array.data) if ridx != i]))
-            return det
+        det = 0
+        for i in range(array.shape[0]):
+            det += (-1)**i * array.data[i][0] * self.__det(Matrix([[c for cidx, c in enumerate(r) if cidx != 0] for ridx, r in enumerate(array.data) if ridx != i]))
+        return det
 
     def adj(self):
         """
